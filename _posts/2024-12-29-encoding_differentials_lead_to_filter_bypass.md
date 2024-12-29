@@ -25,7 +25,7 @@ Chrome, Edge 등의 브라우저에서 사용하고 있는 렌더링 엔진인 b
 ## ISO-2022-JP
 ISO-2022-JP는 일본어 문자를 표현하기 위해 설계된 인코딩 방식 중 하나로 기본적으로 ASCII와 호환되도록 설계되었으며, 필요에 따라 escape sequence를 통해 다른 character set으로 전환해가면서 문자를 표현할 수 있다는 특징을 가지고 있습니다.
 
-이 인코딩 방식에 포함된 character set 중 하나가 JIS X 0201 1976입니다. 이 character set은 대부분의 문자 매핑이 ASCII와 동일하지만, 몇 가지 예외가 존재합니다. 그 중 대표적인 예외가 바로 0x5c에 해당하는 ￥인데요.
+이 인코딩 방식에 포함된 character set 중 하나가 JIS X 0201 1976입니다. 이 character set은 대부분의 문자 매핑이 ASCII와 동일하지만, 몇 가지 예외가 존재합니다. 그 중 대표적인 예외가 바로 `0x5c`에 해당하는 `￥`인데요.
 
 ASCII의 코드페이지에서 `0x5c`는 `\` 에 매핑이 되고 JIS X 0201 1976의 코드페이지에서는 `￥` 에 매핑이 됩니다. 만약 공격자가 문서에 적용될 인코딩 방법을 임의로 지정할 수 있다면, 공격자는 이 점을 이용해서 클라이언트 사이드에서 `\` 기호를 `￥` 기호로 치환할 수 있습니다.
 
@@ -87,7 +87,7 @@ search 파라미터에서는 태그 삽입에 필요한 꺽쇠 기호를 필터�
 
 ![](/assets/images/241229_filtered.png)
 
-하지만 여기서 공격자가 character set을 JIS X 0201 1976으로 전환하는 escape sequence를 삽입하게 된다면 CED의 auto detection에 의해 해당 sequence 이후의 모든 바이트가 JIS X 0201 1976으로 디코딩되면서 escapeString 함수가 추가한 백슬래시가 ￥으로 변환되게 됩니다.
+하지만 여기서 공격자가 character set을 JIS X 0201 1976으로 전환하는 escape sequence를 삽입하게 된다면 CED의 auto detection에 의해 해당 sequence 이후의 모든 바이트가 JIS X 0201 1976으로 디코딩되면서 escapeString 함수가 추가한 `\`가 브라우저에서는 `￥`으로 해석되게 됩니다.
 
 ![](/assets/images/241229_encoding_differential.png)
 
